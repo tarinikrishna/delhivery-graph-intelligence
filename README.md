@@ -74,7 +74,8 @@ dashboard/
 
 ---
 ## live demo:
-https://delhivery-graph-intelligence-mayvyclrhbtu4oqoqyjzjj.streamlit.app/ 
+🔗 https://delhivery-graph-intelligence-mayvyclrhbtu4oqoqyjzjj.streamlit.app/ 
+
 ## Author
 
 tarinikrishna
