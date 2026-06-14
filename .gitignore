@@ -1,0 +1,12 @@
+
+
+.ipynb_checkpoints/
+__pycache__/
+*.pyc
+
+models/random_forest_eta.pkl
+
+data/raw/delivery_data.csv
+data/processed/graph_features.csv
+
+.ipynb_checkpoints/
