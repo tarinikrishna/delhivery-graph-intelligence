@@ -3,6 +3,7 @@ import pandas as pd
 import networkx as nx
 import pickle
 import matplotlib.pyplot as plt
+from pathlib import Path
 
 # --------------------------------------------------
 # Page Config
@@ -60,21 +61,19 @@ st.markdown("""
 <h3>AI-Powered Route Optimization & ETA Prediction</h3>
 </div>
 """, unsafe_allow_html=True)
+# Project root directory
+BASE_DIR = Path(__file__).resolve().parent.parent
 
-# --------------------------------------------------
+GRAPH_PATH = BASE_DIR / "models" / "delivery_graph.pkl"
+MODEL_PATH = BASE_DIR / "models" / "random_forest_eta.pkl"
+
 # Load Graph
-# --------------------------------------------------
-
-with open("models/delivery_graph.pkl", "rb") as f:
+with open(GRAPH_PATH, "rb") as f:
     G = pickle.load(f)
 
-# --------------------------------------------------
 # Load ETA Model
-# --------------------------------------------------
-
-with open("models/random_forest_eta.pkl", "rb") as f:
+with open(MODEL_PATH, "rb") as f:
     model = pickle.load(f)
-
 # --------------------------------------------------
 # Inputs
 # --------------------------------------------------
