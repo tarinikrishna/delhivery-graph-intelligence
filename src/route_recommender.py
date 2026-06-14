@@ -1,22 +1,38 @@
+import pickle
 import networkx as nx
 
-def recommend_route(
-    G,
-    source,
-    destination
-):
+# Load graph
+with open("models/delivery_graph.pkl", "rb") as f:
+    G = pickle.load(f)
 
-    try:
+# Source and destination
+source = "WH_A"
+destination = "CUST_5"
 
-        path = nx.shortest_path(
-            G,
-            source,
-            destination,
-            weight="weight"
-        )
+try:
+    # Find shortest route based on distance
+    shortest_path = nx.shortest_path(
+        G,
+        source=source,
+        target=destination,
+        weight="distance_km"
+    )
 
-        return path
+    # Calculate total distance
+    total_distance = nx.shortest_path_length(
+        G,
+        source=source,
+        target=destination,
+        weight="distance_km"
+    )
 
-    except:
+    print("\nOptimal Route:")
+    print(" -> ".join(shortest_path))
 
-        return None
+    print(f"\nTotal Distance: {total_distance} km")
+
+except nx.NetworkXNoPath:
+    print("No route exists between the selected nodes.")
+
+except Exception as e:
+    print(f"Error: {e}")

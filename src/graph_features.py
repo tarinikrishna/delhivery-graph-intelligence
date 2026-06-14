@@ -1,40 +1,37 @@
+import pickle
 import pandas as pd
 import networkx as nx
 
-def add_graph_features(df, G):
+# Load graph
+with open("models/delivery_graph.pkl", "rb") as f:
+    G = pickle.load(f)
 
-    degree = nx.degree_centrality(G)
+# Degree Centrality
+degree_centrality = nx.degree_centrality(G)
 
-    pagerank = nx.pagerank(G)
+# Betweenness Centrality
+betweenness_centrality = nx.betweenness_centrality(G)
 
-    betweenness = nx.betweenness_centrality(
-        G,
-        k=100,
-        seed=42
-    )
+# Closeness Centrality
+closeness_centrality = nx.closeness_centrality(G)
 
-    df["source_degree"] = (
-        df["source_center"]
-        .map(degree)
-        .fillna(0)
-    )
+features = []
 
-    df["destination_degree"] = (
-        df["destination_center"]
-        .map(degree)
-        .fillna(0)
-    )
+for node in G.nodes():
 
-    df["source_pagerank"] = (
-        df["source_center"]
-        .map(pagerank)
-        .fillna(0)
-    )
+    features.append({
+        "node": node,
+        "degree_centrality": degree_centrality[node],
+        "betweenness_centrality": betweenness_centrality[node],
+        "closeness_centrality": closeness_centrality[node]
+    })
 
-    df["destination_pagerank"] = (
-        df["destination_center"]
-        .map(pagerank)
-        .fillna(0)
-    )
+feature_df = pd.DataFrame(features)
 
-    return df
+feature_df.to_csv(
+    "data/processed/graph_features_v2.csv",
+    index=False
+)
+
+print("Graph feature extraction completed.")
+print(feature_df.head())

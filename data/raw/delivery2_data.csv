@@ -1,0 +1,9 @@
+source,destination,distance_km,traffic_level,weather,delivery_time
+WH_A,HUB_B,10,2,Clear,20
+WH_A,HUB_C,15,3,Rain,35
+HUB_B,CUST_1,5,1,Clear,10
+HUB_B,CUST_2,7,2,Cloudy,15
+HUB_C,CUST_3,8,4,Rain,25
+HUB_C,CUST_4,12,3,Clear,20
+WH_A,HUB_D,20,2,Clear,30
+HUB_D,CUST_5,6,1,Cloudy,12
